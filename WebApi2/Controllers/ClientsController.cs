@@ -31,9 +31,9 @@ namespace WebApi2.Controllers
         [Route("{id:int}", Name = nameof(GetClientById))]
         [ResponseType(typeof(Client))]
         [HttpPost]
-        public HttpResponseMessage GetClientById([FromBody] int id)
+        public HttpResponseMessage GetClientById(int id, [FromBody]int id2)
         {
-            Client client = db.Client.Find(id);
+            Client client = db.Client.Find(id2);
             if (client == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
