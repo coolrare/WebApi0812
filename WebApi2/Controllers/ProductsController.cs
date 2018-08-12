@@ -12,6 +12,7 @@ using WebApi2.Models;
 
 namespace WebApi2.Controllers
 {
+    [RoutePrefix("products")]
     public class ProductsController : ApiController
     {
         private FabricsEntities db = new FabricsEntities();
@@ -25,6 +26,7 @@ namespace WebApi2.Controllers
         /// 取得所有商品資料
         /// </summary>
         /// <returns></returns>
+        [Route("")]
         public IQueryable<Product> GetProduct()
         {
             return db.Product.Take(10);
@@ -36,6 +38,7 @@ namespace WebApi2.Controllers
         /// <param name="id">ProductId</param>
         /// <returns>Product</returns>
         [ResponseType(typeof(Product))]
+        [Route("{id}")]
         public IHttpActionResult GetProduct(int id)
         {
             Product product = db.Product.Find(id);
@@ -49,6 +52,7 @@ namespace WebApi2.Controllers
 
         // PUT: api/Products/5
         [ResponseType(typeof(void))]
+        [Route("{id}")]
         public IHttpActionResult PutProduct(int id, Product product)
         {
             if (!ModelState.IsValid)
@@ -84,6 +88,7 @@ namespace WebApi2.Controllers
 
         // POST: api/Products
         [ResponseType(typeof(Product))]
+        [Route("")]
         public IHttpActionResult PostProduct(Product product)
         {
             if (!ModelState.IsValid)
@@ -99,6 +104,7 @@ namespace WebApi2.Controllers
 
         // DELETE: api/Products/5
         [ResponseType(typeof(Product))]
+        [Route("{id}")]
         public IHttpActionResult DeleteProduct(int id)
         {
             Product product = db.Product.Find(id);
