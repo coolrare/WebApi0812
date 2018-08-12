@@ -7,12 +7,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using WebApi2.Models;
 
 namespace WebApi2.Controllers
 {
     //[MyException]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("clients")]
     public class ClientsController : ApiController
     {

@@ -12,6 +12,9 @@ namespace WebApi2
         public static void Register(HttpConfiguration config)
         {
             // Web API 設定和服務
+
+            config.EnableCors();
+
             config.Filters.Add(new MyExceptionAttribute());
 
             var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
