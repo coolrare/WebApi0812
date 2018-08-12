@@ -12,6 +12,7 @@ using WebApi2.Models;
 
 namespace WebApi2.Controllers
 {
+    [RoutePrefix("clients")]
     public class ClientsController : ApiController
     {
         private FabricsEntities db = new FabricsEntities();
@@ -21,15 +22,15 @@ namespace WebApi2.Controllers
             db.Configuration.LazyLoadingEnabled = false;
         }
 
-        // GET: api/Clients
+        [Route("")]
         public IQueryable<Client> GetClient()
         {
-            return db.Client;
+            return db.Client.Take(10);
         }
 
-        // GET: api/Clients/5
+        [Route("{id:int}", Name = nameof(GetClientById))]
         [ResponseType(typeof(Client))]
-        public IHttpActionResult GetClient(int id)
+        public IHttpActionResult GetClientById(int id)
         {
             Client client = db.Client.Find(id);
             if (client == null)
@@ -40,7 +41,33 @@ namespace WebApi2.Controllers
             return Ok(client);
         }
 
-        // PUT: api/Clients/5
+        [Route("{id:int}/orders")]
+        [ResponseType(typeof(Client))]
+        public IHttpActionResult GetClientOrders(int id)
+        {
+            var orders = db.Order.Where(p => p.ClientId == id);
+            return Ok(orders.ToList());
+        }
+
+        [Route("{id:int}/orders/{date:datetime}")]
+        [ResponseType(typeof(Client))]
+        public IHttpActionResult GetClientOrdersByDate1(int id, DateTime date)
+        {
+            var next_day = date.AddDays(1);
+            var orders = db.Order.Where(p => p.ClientId == id && p.OrderDate >= date && p.OrderDate <= next_day);
+            return Ok(orders.ToList());
+        }
+
+        [Route("{id:int}/orders/{*date:datetime}")]
+        [ResponseType(typeof(Client))]
+        public IHttpActionResult GetClientOrdersByDate2(int id, DateTime date)
+        {
+            var next_day = date.AddDays(1);
+            var orders = db.Order.Where(p => p.ClientId == id && p.OrderDate >= date && p.OrderDate <= next_day);
+            return Ok(orders.ToList());
+        }
+
+        [Route("{id:int}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutClient(int id, Client client)
         {
@@ -75,7 +102,7 @@ namespace WebApi2.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Clients
+        [Route("")]
         [ResponseType(typeof(Client))]
         public IHttpActionResult PostClient(Client client)
         {
@@ -87,10 +114,10 @@ namespace WebApi2.Controllers
             db.Client.Add(client);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = client.ClientId }, client);
+            return CreatedAtRoute(nameof(GetClientById), new { id = client.ClientId }, client);
         }
 
-        // DELETE: api/Clients/5
+        [Route("{id:int}")]
         [ResponseType(typeof(Client))]
         public IHttpActionResult DeleteClient(int id)
         {
