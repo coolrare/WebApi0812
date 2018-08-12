@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		nswag.json = nswag.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiClient", "WebApiClient\WebApiClient.csproj", "{52AB7A03-B432-4962-86C9-03A4D3D1E4F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{53E5625C-1B79-406D-9AC0-233607E326F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53E5625C-1B79-406D-9AC0-233607E326F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53E5625C-1B79-406D-9AC0-233607E326F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52AB7A03-B432-4962-86C9-03A4D3D1E4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52AB7A03-B432-4962-86C9-03A4D3D1E4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52AB7A03-B432-4962-86C9-03A4D3D1E4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52AB7A03-B432-4962-86C9-03A4D3D1E4F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
