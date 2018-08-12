@@ -481,13 +481,13 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
-        <member name="M:WebApi2.Controllers.ProductsController.GetProduct">
+        <member name="M:WebApi2.Controllers.ProductsController.GetProductById">
             <summary>
             取得所有商品資料
             </summary>
             <returns></returns>
         </member>
-        <member name="M:WebApi2.Controllers.ProductsController.GetProduct(System.Int32)">
+        <member name="M:WebApi2.Controllers.ProductsController.GetProductById(System.Int32)">
             <summary>
             取得單一商品資料
             </summary>

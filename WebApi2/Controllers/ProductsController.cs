@@ -27,7 +27,7 @@ namespace WebApi2.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("")]
-        public IQueryable<Product> GetProduct()
+        public IQueryable<Product> GetProductById()
         {
             return db.Product.Take(10);
         }
@@ -38,8 +38,8 @@ namespace WebApi2.Controllers
         /// <param name="id">ProductId</param>
         /// <returns>Product</returns>
         [ResponseType(typeof(Product))]
-        [Route("{id}")]
-        public IHttpActionResult GetProduct(int id)
+        [Route("{id}", Name = nameof(GetProductById))]
+        public IHttpActionResult GetProductById(int id)
         {
             Product product = db.Product.Find(id);
             if (product == null)
@@ -99,7 +99,7 @@ namespace WebApi2.Controllers
             db.Product.Add(product);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = product.ProductId }, product);
+            return CreatedAtRoute(nameof(GetProductById), new { id = product.ProductId }, product);
         }
 
         // DELETE: api/Products/5
