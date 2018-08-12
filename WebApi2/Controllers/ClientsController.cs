@@ -12,6 +12,7 @@ using WebApi2.Models;
 
 namespace WebApi2.Controllers
 {
+    //[MyException]
     [RoutePrefix("clients")]
     public class ClientsController : ApiController
     {
@@ -30,12 +31,12 @@ namespace WebApi2.Controllers
 
         [Route("{id:int}", Name = nameof(GetClientById))]
         [ResponseType(typeof(Client))]
-        [HttpPost]
-        public HttpResponseMessage GetClientById(int id, [FromBody]int id2)
+        public HttpResponseMessage GetClientById(int id)
         {
-            Client client = db.Client.Find(id2);
+            Client client = db.Client.Find(id);
             if (client == null)
             {
+                throw new ArgumentException("Not Found");
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 

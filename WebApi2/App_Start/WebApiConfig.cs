@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using WebApi2.Controllers;
 
 namespace WebApi2
 {
@@ -10,6 +11,7 @@ namespace WebApi2
         public static void Register(HttpConfiguration config)
         {
             // Web API 設定和服務
+            config.Filters.Add(new MyExceptionAttribute());
 
             // Web API 路由
             config.MapHttpAttributeRoutes();
