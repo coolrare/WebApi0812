@@ -30,7 +30,8 @@ namespace WebApi2.Controllers
 
         [Route("{id:int}", Name = nameof(GetClientById))]
         [ResponseType(typeof(Client))]
-        public HttpResponseMessage GetClientById(int id)
+        [HttpPost]
+        public HttpResponseMessage GetClientById([FromBody] int id)
         {
             Client client = db.Client.Find(id);
             if (client == null)
