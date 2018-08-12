@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -12,6 +13,11 @@ namespace WebApi2
         {
             // Web API 設定和服務
             config.Filters.Add(new MyExceptionAttribute());
+
+            var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+
+            json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
 
             // Web API 路由
             config.MapHttpAttributeRoutes();
