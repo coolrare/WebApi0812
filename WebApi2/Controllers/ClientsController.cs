@@ -23,30 +23,36 @@ namespace WebApi2.Controllers
         }
 
         [Route("")]
-        public IQueryable<Client> GetClient()
+        public IHttpActionResult GetClient()
         {
-            return db.Client.Take(10);
+            return Ok(db.Client.Take(10));
         }
 
         [Route("{id:int}", Name = nameof(GetClientById))]
         [ResponseType(typeof(Client))]
-        public IHttpActionResult GetClientById(int id)
+        public HttpResponseMessage GetClientById(int id)
         {
             Client client = db.Client.Find(id);
             if (client == null)
             {
-                return NotFound();
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            return Ok(client);
+            return Request.CreateResponse(client);
         }
 
         [Route("{id:int}/orders")]
         [ResponseType(typeof(Client))]
-        public IHttpActionResult GetClientOrders(int id)
+        public HttpResponseMessage GetClientOrders(int id)
         {
             var orders = db.Order.Where(p => p.ClientId == id);
-            return Ok(orders.ToList());
+            return new HttpResponseMessage()
+            {
+                ReasonPhrase = "HELLO",
+                StatusCode = HttpStatusCode.OK,
+                Content = new ObjectContent<IQueryable<Order>>(orders,
+                    GlobalConfiguration.Configuration.Formatters.JsonFormatter)
+            };
         }
 
         [Route("{id:int}/orders/{date:datetime}")]
